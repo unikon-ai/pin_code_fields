@@ -774,55 +774,59 @@ class _PinCodeTextFieldState extends State<PinCodeTextField>
       textDirection: widget.errorTextDirection,
       child: Padding(
         padding: widget.errorTextMargin,
-        child: TextFormField(
-          textInputAction: widget.textInputAction,
-          controller: _textEditingController,
-          focusNode: _focusNode,
-          enabled: widget.enabled,
-          autofillHints: widget.enablePinAutofill && widget.enabled
-              ? <String>[AutofillHints.oneTimeCode]
-              : null,
-          autofocus: widget.autoFocus,
-          autocorrect: false,
-          keyboardType: widget.keyboardType,
-          keyboardAppearance: widget.keyboardAppearance,
-          textCapitalization: widget.textCapitalization,
-          validator: widget.validator,
-          onSaved: widget.onSaved,
-          autovalidateMode: widget.autovalidateMode,
-          inputFormatters: [
-            ...widget.inputFormatters,
-            LengthLimitingTextInputFormatter(
-              widget.length,
-            ), // this limits the input length
-          ],
-          // trigger on the complete event handler from the keyboard
-          onFieldSubmitted: widget.onSubmitted,
-          onEditingComplete: widget.onEditingComplete,
-          enableInteractiveSelection: false,
-          showCursor: false,
-          // using same as background color so tha it can blend into the view
-          cursorWidth: 0.01,
-          decoration: InputDecoration(
-            contentPadding: const EdgeInsets.all(0),
-            border: InputBorder.none,
-            fillColor: widget.backgroundColor,
-            enabledBorder: InputBorder.none,
-            focusedBorder: InputBorder.none,
-            disabledBorder: InputBorder.none,
-            errorBorder: InputBorder.none,
-            focusedErrorBorder: InputBorder.none,
+        child: Semantics(
+          identifier: "pin_code_text_field",
+          label: "Pin code text field",
+          child: TextFormField(
+            textInputAction: widget.textInputAction,
+            controller: _textEditingController,
+            focusNode: _focusNode,
+            enabled: widget.enabled,
+            autofillHints: widget.enablePinAutofill && widget.enabled
+                ? <String>[AutofillHints.oneTimeCode]
+                : null,
+            autofocus: widget.autoFocus,
+            autocorrect: false,
+            keyboardType: widget.keyboardType,
+            keyboardAppearance: widget.keyboardAppearance,
+            textCapitalization: widget.textCapitalization,
+            validator: widget.validator,
+            onSaved: widget.onSaved,
+            autovalidateMode: widget.autovalidateMode,
+            inputFormatters: [
+              ...widget.inputFormatters,
+              LengthLimitingTextInputFormatter(
+                widget.length,
+              ), // this limits the input length
+            ],
+            // trigger on the complete event handler from the keyboard
+            onFieldSubmitted: widget.onSubmitted,
+            onEditingComplete: widget.onEditingComplete,
+            enableInteractiveSelection: false,
+            showCursor: false,
+            // using same as background color so tha it can blend into the view
+            cursorWidth: 0.01,
+            decoration: InputDecoration(
+              contentPadding: const EdgeInsets.all(0),
+              border: InputBorder.none,
+              fillColor: widget.backgroundColor,
+              enabledBorder: InputBorder.none,
+              focusedBorder: InputBorder.none,
+              disabledBorder: InputBorder.none,
+              errorBorder: InputBorder.none,
+              focusedErrorBorder: InputBorder.none,
+            ),
+            style: TextStyle(
+              color: Colors.transparent,
+              height: .01,
+              fontSize: kIsWeb
+                  ? 1
+                  : 0.01, // it is a hidden textfield which should remain transparent and extremely small
+            ),
+            scrollPadding: widget.scrollPadding,
+            readOnly: widget.readOnly,
+            obscureText: widget.obscureText,
           ),
-          style: TextStyle(
-            color: Colors.transparent,
-            height: .01,
-            fontSize: kIsWeb
-                ? 1
-                : 0.01, // it is a hidden textfield which should remain transparent and extremely small
-          ),
-          scrollPadding: widget.scrollPadding,
-          readOnly: widget.readOnly,
-          obscureText: widget.obscureText,
         ),
       ),
     );
@@ -879,8 +883,8 @@ class _PinCodeTextFieldState extends State<PinCodeTextField>
                       }
                     : null,
                 child: Semantics(
-                  identifier: "pin_code_text_field",
-                  label: "Pin code text field",
+                  identifier: "pin_code_fake_text_field",
+                  label: "Pin code text fake field",
                   child: Row(
                     mainAxisAlignment: widget.mainAxisAlignment,
                     children: _generateFields(),
